@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HelloWorld.Models;
+using HelloWorld.Binders;
 
 namespace HelloWorld.Controllers
 {
@@ -12,7 +13,7 @@ namespace HelloWorld.Controllers
         // GET: Customer
         public ActionResult Load()
         {
-            Customer cust =
+            var cust =
                 new Customer
                 {
                     CustomerCode = "1001",
@@ -26,7 +27,7 @@ namespace HelloWorld.Controllers
         {
             return View("AddCustomer");
         }
-        public ActionResult Submit(Customer cust)
+        public ActionResult Submit([ModelBinder(typeof(CustomerBinder))] Customer cust)
         {
             //Customer cust = new Customer();
             //cust.CustomerCode = Request.Form["CustomerCode"];
