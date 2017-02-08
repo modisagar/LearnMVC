@@ -11,10 +11,16 @@ namespace HelloWorld.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return View();
+            ViewBag.MyTime = DateTime.Now.ToString();
+            TempData["MyTime"] = DateTime.Now.ToString();
+            Session["MyTime"] = DateTime.Now.ToString();
+            return RedirectToAction("GotoHome", "Home");
+            //return View();
         }
         public ActionResult GotoHome()
         {
+            //ViewData["MyTime"] = DateTime.Now.ToString();
+            ViewBag.MyTime = DateTime.Now.ToString();
             return View("MyHomePage");
         }
     }
