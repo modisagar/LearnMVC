@@ -27,12 +27,16 @@ namespace HelloWorld.Controllers
         {
             return View("AddCustomer");
         }
-        public ActionResult Submit([ModelBinder(typeof(CustomerBinder))] Customer cust)
+        //public ActionResult Submit([ModelBinder(typeof(CustomerBinder))] Customer cust)
+        public ActionResult Submit(Customer cust)
         {
             //Customer cust = new Customer();
             //cust.CustomerCode = Request.Form["CustomerCode"];
             //cust.CustomerName = Request.Form["CustomerName"];
-            return View("Customer",cust);
+            if (ModelState.IsValid)
+                return View("Customer", cust);
+            else
+                return View("AddCustomer");
         }
     }
 }

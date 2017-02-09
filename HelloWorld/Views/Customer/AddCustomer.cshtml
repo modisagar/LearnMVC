@@ -1,4 +1,4 @@
-﻿
+﻿@model HelloWorld.Models.Customer
 @{
     Layout = null;
 }
@@ -8,15 +8,25 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <title>AddCustomer</title>
 </head>
 <body>
-    <div> 
-        <form action="Submit" method="post">
+    <div>
+        @using (Html.BeginForm("Submit", "Customer", FormMethod.Post))
+        {
+            <i>Customer Name</i>@Html.TextBoxFor(m => m.CustomerName) @Html.ValidationMessageFor(m => m.CustomerName) <br />
+            <i>Customer Code</i>@Html.TextBoxFor(m => m.CustomerCode) @Html.ValidationMessageFor(m => m.CustomerCode) <br />
+            <input id="Submit1" type="submit" value="submit" />
+        } 
+        @*<form action="Submit" method="post">
             Customer Name: <input name="txtCustomerName" id="Text1" type="text" /> <br />
             Customer Code: <input name="txtCustomerCode" id="Text1" type="text" /> <br />
             <input id="Submit1" type="submit" value="submit" />
-        </form>
+        </form>*@
+        @*@Html.ValidationSummary();*@
     </div>
 </body>
 </html>
