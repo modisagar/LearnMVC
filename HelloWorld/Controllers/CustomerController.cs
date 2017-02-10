@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using HelloWorld.Models;
 using HelloWorld.Binders;
+using HelloWorld.Dal;
 
 namespace HelloWorld.Controllers
 {
@@ -30,11 +31,13 @@ namespace HelloWorld.Controllers
         //public ActionResult Submit([ModelBinder(typeof(CustomerBinder))] Customer cust)
         public ActionResult Submit(Customer cust)
         {
-            //Customer cust = new Customer();
-            //cust.CustomerCode = Request.Form["CustomerCode"];
-            //cust.CustomerName = Request.Form["CustomerName"];
             if (ModelState.IsValid)
+            {
+                var Dal = new CustomerDal();
+                Dal.Customers.Add(cust);
+                Dal.SaveChanges();
                 return View("Customer", cust);
+            }
             else
                 return View("AddCustomer");
         }
